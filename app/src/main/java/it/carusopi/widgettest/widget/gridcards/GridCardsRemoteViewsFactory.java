@@ -55,21 +55,24 @@ public class GridCardsRemoteViewsFactory implements RemoteViewsService.RemoteVie
             return null;
         }
 
-        CartaFedeltaModel card = mFidelityCards.get(position);
 
-        RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.grid_cards_widget_item);
+            CartaFedeltaModel card = mFidelityCards.get(position);
+
+        RemoteViews rv =  new RemoteViews(mContext.getPackageName(), R.layout.grid_cards_widget_item);
 //        rv.setTextViewText(R.id.text_view_card, card.getNegozio().getNome());
-        rv.setImageViewResource(R.id.image_view_card, R.drawable.logodimeglio);
+            rv.setImageViewResource(R.id.image_view_card, R.drawable.logodimeglio);
 
-        // Next, set a fill-intent, which will be used to fill in the pending intent template
-        // that is set on the collection view in StackWidgetProvider.
-//        Bundle extras = new Bundle();
-//        extras.putSerializable(GridCardsWidgetProvider.GRID_ITEM_UUID, card.getId());
-//        Intent fillInIntent = new Intent();
-//        fillInIntent.putExtras(extras);
-//        // Make it possible to distinguish the individual on-click
-//        // action of a given item
-//        rv.setOnClickFillInIntent(R.id.layout_grid_item_container, fillInIntent);
+            // Next, set a fill-intent, which will be used to fill in the pending intent template
+            // that is set on the collection view in StackWidgetProvider.
+            Bundle extras = new Bundle();
+            extras.putSerializable(GridCardsWidgetProvider.GRID_ITEM_UUID, card.getId());
+            Intent fillInIntent = new Intent();
+            fillInIntent.putExtras(extras);
+            // Make it possible to distinguish the individual on-click
+            // action of a given item
+            rv.setOnClickFillInIntent(R.id.layout_grid_item_container, fillInIntent);
+
+
 
         return rv;
     }

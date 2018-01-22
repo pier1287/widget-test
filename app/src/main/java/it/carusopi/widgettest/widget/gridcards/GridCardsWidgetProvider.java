@@ -22,17 +22,17 @@ public class GridCardsWidgetProvider extends AppWidgetProvider {
     public static final String GRID_ITEM_CLICK = "it.nttdata.android.gridwidget.GRID_ITEM_CLICK";
     public static final String GRID_ITEM_UUID = "it.nttdata.android.gridwidget.GRID_ITEM_UUID";
 
-//    @Override
-//    public void onReceive(Context context, Intent intent) {
-//        AppWidgetManager mgr = AppWidgetManager.getInstance(context);
-//        if (intent.getAction().equals(GRID_ITEM_CLICK)) {
-//            int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-//                    AppWidgetManager.INVALID_APPWIDGET_ID);
-//            UUID itemUUID =  (UUID) intent.getSerializableExtra(GRID_ITEM_UUID);
-//            Toast.makeText(context, "Touched view " + itemUUID.toString(), Toast.LENGTH_SHORT).show();
-//        }
-//        super.onReceive(context, intent);
-//    }
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        AppWidgetManager mgr = AppWidgetManager.getInstance(context);
+        if (intent.getAction().equals(GRID_ITEM_CLICK)) {
+            int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+                    AppWidgetManager.INVALID_APPWIDGET_ID);
+            UUID itemUUID =  (UUID) intent.getSerializableExtra(GRID_ITEM_UUID);
+            Toast.makeText(context, "Touched view " + itemUUID.toString(), Toast.LENGTH_SHORT).show();
+        }
+        super.onReceive(context, intent);
+    }
 
 
     @Override
@@ -61,16 +61,16 @@ public class GridCardsWidgetProvider extends AppWidgetProvider {
             // cannot set up their own pending intents. Instead, the collection as a whole sets
             // up a pending intent template, and the individual items set a fillInIntent
             // to create unique behavior on an item-by-item basis.
-//            Intent launchCardActivity = new Intent(context, GridCardsWidgetProvider.class);
-//            // Set the action for the intent.
-//            // When the user touches a particular view, it will have the effect of
-//            // broadcasting TOAST_ACTION.
-//            launchCardActivity.setAction(GridCardsWidgetProvider.GRID_ITEM_CLICK);
-//            launchCardActivity.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds[i]);
-//
-//            PendingIntent toastPendingIntent = PendingIntent.getBroadcast(context, 0, launchCardActivity,
-//                    PendingIntent.FLAG_UPDATE_CURRENT);
-//            rv.setPendingIntentTemplate(R.id.grid_view_fidelity_cards, toastPendingIntent);
+            Intent launchCardActivity = new Intent(context, GridCardsWidgetProvider.class);
+            // Set the action for the intent.
+            // When the user touches a particular view, it will have the effect of
+            // broadcasting TOAST_ACTION.
+            launchCardActivity.setAction(GridCardsWidgetProvider.GRID_ITEM_CLICK);
+            launchCardActivity.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds[i]);
+
+            PendingIntent toastPendingIntent = PendingIntent.getBroadcast(context, 0, launchCardActivity,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
+            rv.setPendingIntentTemplate(R.id.grid_view_fidelity_cards, toastPendingIntent);
 
             appWidgetManager.updateAppWidget(appWidgetIds[i], rv);
         }
